@@ -88,9 +88,14 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <SearchView
+                            <AutoCompleteTextView
+                                android:id="@+id/autoCompleteTextView"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:completionHint="출발지를 입력하세요."
+                                android:completionThreshold="1"
+                                android:gravity="center_vertical"
+                                android:textColorHint="#555555" />
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -116,9 +121,14 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <SearchView
+                            <AutoCompleteTextView
+                                android:id="@+id/autoCompleteTextView2"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:completionHint="도착지를 입력하세요."
+                                android:completionThreshold="1"
+                                android:gravity="center_vertical"
+                                android:textColorHint="#555555" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

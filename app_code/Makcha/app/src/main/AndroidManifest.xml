@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Makcha">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SecondActivity"/>
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan"></activity>
+        <activity android:name=".SecondActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan"></activity>
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
