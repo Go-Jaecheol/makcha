@@ -50,7 +50,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="5"
+                    android:layout_weight="3"
                     android:orientation="vertical">
 
                     <ImageButton
@@ -58,9 +58,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="0dp"
-                        android:src="@drawable/searchbtn"/>
+                        android:src="@drawable/back_icon"/>
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+                    <ImageButton
+                        android:id="@+id/change_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="0dp"
+                        android:src="@drawable/change_icon"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -73,27 +83,12 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="4">
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="출발"
-                                android:textColor="@color/black"
-                                android:gravity="center_horizontal|center_vertical"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:layout_weight="1">
-
                             <AutoCompleteTextView
-                                android:id="@+id/autoCompleteTextView"
+                                android:id="@+id/starting_point"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:completionHint="출발지를 입력하세요."
+                                android:hint="출발지를 입력하세요."
                                 android:completionThreshold="1"
                                 android:gravity="center_vertical"
                                 android:textColorHint="#555555" />
@@ -106,27 +101,12 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="4">
-
-                            <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="도착"
-                                android:textColor="@color/black"
-                                android:gravity="center_horizontal|center_vertical"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:layout_weight="1">
-
                             <AutoCompleteTextView
-                                android:id="@+id/autoCompleteTextView2"
+                                android:id="@+id/finish_point"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:completionHint="도착지를 입력하세요."
+                                android:hint="도착지를 입력하세요."
                                 android:completionThreshold="1"
                                 android:gravity="center_vertical"
                                 android:textColorHint="#555555" />
@@ -141,10 +121,10 @@
 
                 <ImageButton
                     android:id="@+id/search_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:padding="0dp"
-                    android:src="@drawable/searchbtn"/>
+                    android:src="@drawable/send_icon" />
             </LinearLayout>
         </LinearLayout>
 
@@ -153,6 +133,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="10">
+
+                <Switch
+                    android:id="@+id/alarm_switch"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="Alarm On/Off   " />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
