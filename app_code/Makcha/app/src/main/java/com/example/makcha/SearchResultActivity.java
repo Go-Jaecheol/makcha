@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -45,6 +46,19 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+
+        /* View Part */
+        GetLastBusInfo GetLastBusInfo = new GetLastBusInfo();
+        //set busNumberVier
+        String busNumber = "";
+        TextView busNumberView = (TextView) findViewById(R.id.busNumber);
+        busNumber = GetLastBusInfo.getLastBusNumber();
+        busNumberView.setText(busNumber);
+        //busArrivalTime View
+        String busArrivalTime = "";
+        TextView busArrivalTimeView = (TextView) findViewById(R.id.busArribalTime);
+        busArrivalTime = GetLastBusInfo.setLastBusArrivalTime();
+        busArrivalTimeView.setText(busArrivalTime);
 
         // ##여기부터 알람설정
         Switch switchbutton = (Switch) findViewById(R.id.alarm_switch);
