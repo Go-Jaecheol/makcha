@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,11 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Toast toast;
     private BackPressHandler backPressHandler = new BackPressHandler(this);
     private DrawerLayout mDrawerLayout; // 네비게이터 Drawer
     private Context context = this;
     public BusStationLoading BusStationLoading = new BusStationLoading();
+    private StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,7 @@ public class MainActivity extends AppCompatActivity {
         change_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Editable temp;
-                temp = startingPointView.getText();
-                startingPointView.setText(finishPointView.getText());
-                finishPointView.setText(temp);
+                StartFinishInputControl.swap_starting_and_ending(startingPointView, finishPointView);
             }
         }); // 출발지, 도착지 Swap 기능
 
@@ -61,11 +60,19 @@ public class MainActivity extends AppCompatActivity {
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
-                intent.putExtra("starting_p", startingPointView.getText().toString());
-                intent.putExtra("finish_p", finishPointView.getText().toString());
-                startActivity(intent);//액티비티 띄우기
-                finish();
+                if(startingPointView.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "출발지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else if(finishPointView.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "도착지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                    intent.putExtra("starting_p", startingPointView.getText().toString());
+                    intent.putExtra("finish_p", finishPointView.getText().toString());
+                    startActivity(intent);//액티비티 띄우기
+                    finish();
+                }
             }
         }); // 검색 기능
 
