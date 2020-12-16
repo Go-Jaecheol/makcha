@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ImageButton button = (ImageButton)findViewById(R.id.imageButton2);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageButton search_button = (ImageButton)findViewById(R.id.imageButton2);
+        search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
