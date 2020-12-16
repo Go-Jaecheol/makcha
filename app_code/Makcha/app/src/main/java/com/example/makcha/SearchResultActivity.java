@@ -20,7 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
@@ -30,7 +30,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub);
+        setContentView(R.layout.activity_search_result);
 
         // ##여기서부터 자동완성 부분
         list = new ArrayList<String>(); // 리스트 생성
@@ -45,8 +45,9 @@ public class SecondActivity extends AppCompatActivity {
         // ##여기까지가 자동완성 부분
 
 
-        ImageButton button = (ImageButton) findViewById(R.id.imageButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageButton back_button = (ImageButton) findViewById(R.id.back_button);
+        back_button.setBackgroundResource(R.drawable.backbtn);
+        back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
@@ -54,6 +55,9 @@ public class SecondActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
+        search_button.setBackgroundResource(R.drawable.searchbtn);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,6 +82,11 @@ public class SecondActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 
     @Override

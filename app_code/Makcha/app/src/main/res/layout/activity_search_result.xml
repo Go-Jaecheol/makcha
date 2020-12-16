@@ -54,10 +54,11 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/back_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:srcCompat="@android:drawable/ic_menu_revert" />
+                        android:padding="0dp"
+                        android:src="@drawable/searchbtn"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -139,11 +140,11 @@
                 android:layout_weight="5">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="22dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/ic_menu_search" />
+                    android:id="@+id/search_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:src="@drawable/searchbtn"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BackPressHandler backPressHandler = new BackPressHandler(this);
+
     private DrawerLayout mDrawerLayout;
     private Context context = this;
 
@@ -47,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ImageButton button = (ImageButton)findViewById(R.id.imageButton2);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
+        search_button.setBackgroundResource(R.drawable.searchbtn);
+        search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
         });
@@ -80,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 앱 종료");
     }
 
     @Override
