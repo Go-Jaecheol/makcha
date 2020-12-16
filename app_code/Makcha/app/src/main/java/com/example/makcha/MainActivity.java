@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BackPressHandler backPressHandler = new BackPressHandler(this);
+
     private DrawerLayout mDrawerLayout;
     private Context context = this;
 
@@ -80,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 앱 종료");
     }
 
     @Override
