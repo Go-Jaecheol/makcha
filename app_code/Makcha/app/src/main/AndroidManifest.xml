@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Makcha">
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize|adjustPan"></activity>
-        <activity android:name=".SecondActivity"
+        <activity android:name=".SearchResultActivity"
             android:windowSoftInputMode="adjustResize|adjustPan"></activity>
         <activity android:name=".LoadingActivity">
             <intent-filter>

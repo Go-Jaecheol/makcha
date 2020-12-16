@@ -49,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ImageButton search_button = (ImageButton)findViewById(R.id.imageButton2);
+        ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
+        search_button.setBackgroundResource(R.drawable.searchbtn);
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
                 startActivity(intent);//액티비티 띄우기
             }
         });
