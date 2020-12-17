@@ -98,15 +98,15 @@ public class SearchResultActivity extends AppCompatActivity {
         String finish_p = it.getStringExtra("finish_p");
 
         // Bustation new value check
-        BusStationLoading.checking_new_value();
+        BusStationLoading.settingList();
        // ##여기서부터 자동완성 부분
         final AutoCompleteTextView startingPointView = (AutoCompleteTextView) findViewById(R.id.starting_point);
         final AutoCompleteTextView finishPointView = (AutoCompleteTextView) findViewById(R.id.finish_point);
         // AutoCompleteTextView 에 아답터를 연결한다.
         startingPointView.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.list ));
+                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
         finishPointView.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.list ));
+                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
         // ##여기까지가 자동완성 부분
         startingPointView.setText(starting_p);
         finishPointView.setText(finish_p);
@@ -139,9 +139,9 @@ public class SearchResultActivity extends AppCompatActivity {
                 else if(finishPointView.getText().toString().equals(""))
                     Toast.makeText(getApplicationContext(), "도착지를 입력하세요.", Toast.LENGTH_SHORT).show();
                 else {
-                    if(!BusStationLoading.list.contains(startingPointView.getText().toString()))
+                    if(!BusStationLoading.BusStationList.contains(startingPointView.getText().toString()))
                         Toast.makeText(getApplicationContext(), "존재하지 않는 출발지입니다.", Toast.LENGTH_SHORT).show();
-                    else if(!BusStationLoading.list.contains(finishPointView.getText().toString()))
+                    else if(!BusStationLoading.BusStationList.contains(finishPointView.getText().toString()))
                         Toast.makeText(getApplicationContext(), "존재하지 않는 도착지입니다.", Toast.LENGTH_SHORT).show();
                     else{
                         Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
