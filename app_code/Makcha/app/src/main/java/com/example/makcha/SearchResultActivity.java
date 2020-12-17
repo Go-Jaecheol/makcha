@@ -37,7 +37,7 @@ public class SearchResultActivity extends MainActivity {
 
     private DrawerLayout mDrawerLayout;
     private final Context context = this;
-    public BusStationLoading BusStationLoading = new BusStationLoading();
+    private final BusStationLoading BusStationLoading = new BusStationLoading();
     private final StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
     GetLastBusInfo GetLastBusInfo = new GetLastBusInfo();
     GetBusBoard GetBusBoard = new GetBusBoard();
@@ -104,7 +104,7 @@ public class SearchResultActivity extends MainActivity {
         // 여기까지 네비게이션 뷰 설정
     }
 
-    public void setBookmarkButton(String starting_p, String finish_p){
+    private void setBookmarkButton(String starting_p, String finish_p){
         ImageButton bookmarkbutton = (ImageButton)findViewById(R.id.bookmarkbutton);
         bookmarkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +119,7 @@ public class SearchResultActivity extends MainActivity {
         }); // 즐겨찾기 설정 기능
     }
 
-    public void setBackButton(){
+    private void setBackButton(){
         ImageButton back_button = (ImageButton) findViewById(R.id.back_button);
         //back_button.setBackgroundResource(R.drawable.backbtn);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +132,7 @@ public class SearchResultActivity extends MainActivity {
         }); // 뒤로가기 기능
     }
 
-    public void setAlarm(){
+    private void setAlarm(){
         int arrivalTime;
         arrivalTime = GetLastBusInfo.getLastBusRemainTime() * 60000;
 
@@ -193,7 +193,7 @@ public class SearchResultActivity extends MainActivity {
         }
     }
 
-    public void setLastBusInfo(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
+    private void setLastBusInfo(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
         /* View Part */
         //set busNumberVier
         GetLastBusInfo.getLastBusInfo(startingPointView.getText().toString(), finishPointView.getText().toString());
@@ -208,7 +208,7 @@ public class SearchResultActivity extends MainActivity {
         busArrivalTimeView.setText(busArrivalMsg);
     }
 
-    public void setBusBoard(AutoCompleteTextView startingPointView){
+    private void setBusBoard(AutoCompleteTextView startingPointView){
         /* View Part */
         //board Bus number view
         GetBusBoard.getBusBoardInfo(startingPointView.getText().toString());
@@ -252,7 +252,7 @@ public class SearchResultActivity extends MainActivity {
         boardBusLocation3View.setText(boardBusLocation3);
     }
 
-    public boolean CheckAppFirstExecute(){
+    protected boolean CheckAppFirstExecute(){
         SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
         boolean isFirst = pref.getBoolean("isFirst", false);
         if(!isFirst){ //최초 실행시 true 저장

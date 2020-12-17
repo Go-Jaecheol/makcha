@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private final BackPressHandler backPressHandler = new BackPressHandler(this);
     private DrawerLayout mDrawerLayout; // 네비게이터 Drawer
     private final Context context = this;
-    public BusStationLoading BusStationLoading = new BusStationLoading();
+    private final BusStationLoading BusStationLoading = new BusStationLoading();
     private final StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
 
     @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setNaviView();
     }
 
-    public void setQuickButton(){
+    protected void setQuickButton(){
         ImageButton bookmark1_btn = (ImageButton)findViewById(R.id.bookmark1_btn);
         TextView bookmark1_start = (TextView)findViewById(R.id.bookmark1_start);
         TextView bookmark1_finish = (TextView)findViewById(R.id.bookmark1_finish);
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }); // 즐겨찾기 해제 기능
     }
 
-    public void setSearchButton(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
+    protected void setSearchButton(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
         ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
         // search_button.setBackgroundResource(R.drawable.searchbtn);
         search_button.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }); // 검색 기능
     }
 
-    public void setNaviView(){
+    private void setNaviView(){
         // 여기부터 네비게이터 뷰 설정
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         // 여기까지 네비게이터 뷰 설정
     }
 
-    public void autoInputComplete(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView) {
+    protected void autoInputComplete(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView) {
         // AutoCompleteTextView 에 아답터를 연결한다.
         startingPointView.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         // ##여기까지가 자동완성 부분
     }
 
-    public void setSwapButton(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
+    protected void setSwapButton(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
         ImageButton change_button = (ImageButton) findViewById(R.id.change_button);
         change_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //앱최초실행확인 (true - 최초실행)
-    public boolean CheckAppFirstExecute(){
+    protected boolean CheckAppFirstExecute(){
         SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
         boolean isFirst = pref.getBoolean("isFirst", false);
         if(!isFirst){ //최초 실행시 true 저장
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         return !isFirst;
     }
 
-    public void busStationSetting(SharedPreferences bus_station_info){
+    protected void busStationSetting(SharedPreferences bus_station_info){
         // bustation_setting
         if(CheckAppFirstExecute())
             BusStationLoading.settingList(bus_station_info);

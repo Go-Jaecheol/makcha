@@ -38,39 +38,39 @@ public class GetBusBoard {
         boardBusLocation3 = "수창초등학교";
     }
 
-    public String getBoardBusArrivalTime1() {
+    protected String getBoardBusArrivalTime1() {
         return boardBusArrivalTime1;
     }
 
-    public String getBoardBusArrivalTime2() {
+    protected String getBoardBusArrivalTime2() {
         return boardBusArrivalTime2;
     }
 
-    public String getBoardBusArrivalTime3() {
+    protected String getBoardBusArrivalTime3() {
         return boardBusArrivalTime3;
     }
 
-    public String getBoardBusLocation1() {
+    protected String getBoardBusLocation1() {
         return boardBusLocation1;
     }
 
-    public String getBoardBusLocation2() {
+    protected String getBoardBusLocation2() {
         return boardBusLocation2;
     }
 
-    public String getBoardBusLocation3() {
+    protected String getBoardBusLocation3() {
         return boardBusLocation3;
     }
 
-    public String getBoardBusNumber1() {
+    protected String getBoardBusNumber1() {
         return boardBusNumber1;
     }
 
-    public String getBoardBusNumber2() {
+    protected String getBoardBusNumber2() {
         return boardBusNumber2;
     }
 
-    public String getBoardBusNumber3() {
+    protected String getBoardBusNumber3() {
         return boardBusNumber3;
     }
 }

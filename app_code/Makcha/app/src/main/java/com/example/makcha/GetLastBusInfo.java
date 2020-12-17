@@ -27,11 +27,11 @@ public class GetLastBusInfo {
         return msg;
     }
 
-    public String getLastBusNumer() {
+    protected String getLastBusNumer() {
         return lastBusNumer;
     }
 
-    public int getLastBusRemainTime() {
+    protected int getLastBusRemainTime() {
         return lastBusRemainTime;
     }
 }
