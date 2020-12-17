@@ -10,6 +10,6 @@
     <string name="boardBusArrivalTime2">시간2</string>
     <string name="boardBusLocation2">정류장2</string>
     <string name="boardBusNumber3">넘버3</string>
-    <string name="boardBusArrivalTime3">test</string>
+    <string name="boardBusArrivalTime3">시간3</string>
     <string name="boardBusLocation3">정류장3</string>
 </resources>
