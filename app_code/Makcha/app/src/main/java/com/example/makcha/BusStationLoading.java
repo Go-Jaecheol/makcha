@@ -1,14 +1,28 @@
 package com.example.makcha;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class BusStationLoading {
 
-    public List<String> BusStationList = new ArrayList<String>();          // 데이터를 넣은 리스트변수
+    protected List<String> BusStationList = new ArrayList<String>();          // 데이터를 넣은 리스트변수
 
     // 서버에서 받아온 정류장 정보 setting
-    protected void settingList(){
+    protected void checkingChanges(SharedPreferences bus_station_info) {
+        // 1. DB에 있는 버스 정류장 정보에 변화가 있을시
+        // settingList(bus_station_info);
+        // 2. DB에 있는 버스 정류장 정보에 변화가 없을시
+        getBusStationList(bus_station_info);
+    }
+
+    protected void settingList(SharedPreferences bus_station_info) {
         // 1. DB 서버에 전체 대구 정류장 정보가 저장되어 있다.
 
         // 2. NODE 서버에 정류장 정보를 요청하여 받는다
@@ -88,5 +102,35 @@ public class BusStationLoading {
         BusStationList.add("칠곡우방타운건너(종점)");
         BusStationList.add("양지마을앞");
         BusStationList.add("관음변전소1");
+        setBusStationList(bus_station_info);
     }
+
+    private void setBusStationList(SharedPreferences bus_station_info) {
+        SharedPreferences.Editor editor = bus_station_info.edit();
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < BusStationList.size(); i++) {
+            jsonArray.put(BusStationList.get(i));
+        }
+        if (!BusStationList.isEmpty())
+            editor.putString("BusStation", jsonArray.toString());
+        else
+            editor.putString("BusStation", null);
+        editor.apply();
+    }
+
+    private void getBusStationList(SharedPreferences bus_station_info) {
+        String json = bus_station_info.getString("BusStation", null);
+        if (json != null) {
+            try {
+                JSONArray jArray = new JSONArray(json);
+                for (int i = 0; i < jArray.length(); i++) {
+                    String data = jArray.optString(i);
+                    BusStationList.add(data);
+                }
+            } catch (JSONException ignored) {
+            }
+
+        }
+    }
+
 }

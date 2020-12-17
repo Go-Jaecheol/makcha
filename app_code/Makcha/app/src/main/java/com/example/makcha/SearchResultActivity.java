@@ -1,5 +1,6 @@
 package com.example.makcha;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -98,7 +99,10 @@ public class SearchResultActivity extends AppCompatActivity {
         String finish_p = it.getStringExtra("finish_p");
 
         // Bustation new value check
-        BusStationLoading.settingList();
+        SharedPreferences bus_station_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if(CheckAppFirstExecute())
+            BusStationLoading.settingList(bus_station_info);
+        BusStationLoading.checkingChanges(bus_station_info);
        // ##여기서부터 자동완성 부분
         final AutoCompleteTextView startingPointView = (AutoCompleteTextView) findViewById(R.id.starting_point);
         final AutoCompleteTextView finishPointView = (AutoCompleteTextView) findViewById(R.id.finish_point);
@@ -226,6 +230,17 @@ public class SearchResultActivity extends AppCompatActivity {
         }
     }
 
+    public boolean CheckAppFirstExecute(){
+        SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
+        boolean isFirst = pref.getBoolean("isFirst", false);
+        if(!isFirst){ //최초 실행시 true 저장
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.commit();
+        }
+
+        return !isFirst;
+    }
 
     @Override
     public void onBackPressed() {

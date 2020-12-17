@@ -1,5 +1,6 @@
 package com.example.makcha;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Bustation setting
-        BusStationLoading.settingList();
+        SharedPreferences bus_station_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if(CheckAppFirstExecute())
+            BusStationLoading.settingList(bus_station_info);
+        else{
+            BusStationLoading.checkingChanges(bus_station_info);
+        }
         // ##여기서부터 자동완성 부분
         final AutoCompleteTextView startingPointView = (AutoCompleteTextView) findViewById(R.id.starting_point);
         final AutoCompleteTextView finishPointView = (AutoCompleteTextView) findViewById(R.id.finish_point);
@@ -151,6 +157,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // 여기까지 네비게이터 뷰 설정
+    }
+
+    //앱최초실행확인 (true - 최초실행)
+    public boolean CheckAppFirstExecute(){
+        SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
+        boolean isFirst = pref.getBoolean("isFirst", false);
+        if(!isFirst){ //최초 실행시 true 저장
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.commit();
+        }
+
+        return !isFirst;
     }
 
     @Override
