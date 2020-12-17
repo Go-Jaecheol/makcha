@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -39,8 +37,8 @@ public class SearchResultActivity extends MainActivity {
     private final Context context = this;
     private final BusStationLoading BusStationLoading = new BusStationLoading();
     private final StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
-    GetLastBusInfo GetLastBusInfo = new GetLastBusInfo();
-    GetBusBoard GetBusBoard = new GetBusBoard();
+    private final GetLastBusInfo GetLastBusInfo = new GetLastBusInfo();
+    private final GetBusBoard GetBusBoard = new GetBusBoard();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
