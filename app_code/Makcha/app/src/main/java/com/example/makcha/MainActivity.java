@@ -24,67 +24,39 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private Toast toast;
-    private BackPressHandler backPressHandler = new BackPressHandler(this);
+    private final BackPressHandler backPressHandler = new BackPressHandler(this);
     private DrawerLayout mDrawerLayout; // 네비게이터 Drawer
-    private Context context = this;
+    private final Context context = this;
     public BusStationLoading BusStationLoading = new BusStationLoading();
-    private StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
+    private final StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Bustation setting
-        SharedPreferences bus_station_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if(CheckAppFirstExecute())
-            BusStationLoading.settingList(bus_station_info);
-        else{
-            BusStationLoading.checkingChanges(bus_station_info);
-        }
         // ##여기서부터 자동완성 부분
         final AutoCompleteTextView startingPointView = (AutoCompleteTextView) findViewById(R.id.starting_point);
         final AutoCompleteTextView finishPointView = (AutoCompleteTextView) findViewById(R.id.finish_point);
-        // AutoCompleteTextView 에 아답터를 연결한다.
-        startingPointView.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
-        finishPointView.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
-        // ##여기까지가 자동완성 부분
 
-        ImageButton change_button = (ImageButton) findViewById(R.id.change_button);
-        change_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StartFinishInputControl.swap_starting_and_ending(startingPointView, finishPointView);
-            }
-        }); // 출발지, 도착지 Swap 기능
+        //busstationSetting
+        SharedPreferences bus_station_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        busStationSetting(bus_station_info);
 
-        ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
-       // search_button.setBackgroundResource(R.drawable.searchbtn);
-        search_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(startingPointView.getText().toString().equals(""))
-                    Toast.makeText(getApplicationContext(), "출발지를 입력하세요.", Toast.LENGTH_SHORT).show();
-                else if(finishPointView.getText().toString().equals(""))
-                    Toast.makeText(getApplicationContext(), "도착지를 입력하세요.", Toast.LENGTH_SHORT).show();
-                else {
-                    if(!BusStationLoading.BusStationList.contains(startingPointView.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "존재하지 않는 출발지입니다.", Toast.LENGTH_SHORT).show();
-                    else if(!BusStationLoading.BusStationList.contains(finishPointView.getText().toString()))
-                        Toast.makeText(getApplicationContext(), "존재하지 않는 도착지입니다.", Toast.LENGTH_SHORT).show();
-                    else{
-                        Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
-                        intent.putExtra("starting_p", startingPointView.getText().toString());
-                        intent.putExtra("finish_p", finishPointView.getText().toString());
-                        startActivity(intent);//액티비티 띄우기
-                        finish();
-                    }
-                }
-            }
-        }); // 검색 기능
+        //autoInputComplete
+        autoInputComplete(startingPointView, finishPointView);
 
+        // swap starting <-> finish
+        setSwapButton(startingPointView, finishPointView);
+
+        // searchButton
+        setSearchButton(startingPointView, finishPointView);
+
+        // setBookmarkButton
+        setQuickButton();
+        setNaviView();
+    }
+
+    public void setQuickButton(){
         ImageButton bookmark1_btn = (ImageButton)findViewById(R.id.bookmark1_btn);
         TextView bookmark1_start = (TextView)findViewById(R.id.bookmark1_start);
         TextView bookmark1_finish = (TextView)findViewById(R.id.bookmark1_finish);
@@ -113,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         bookmark1_start.setText(bookmark_sp);
         bookmark1_finish.setText(bookmark_fp);
 
-
         ImageButton unbookmarkbutton = (ImageButton)findViewById(R.id.unbookmarkbutton);
         unbookmarkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,8 +99,36 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }); // 즐겨찾기 해제 기능
+    }
 
+    public void setSearchButton(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
+        ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
+        // search_button.setBackgroundResource(R.drawable.searchbtn);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(startingPointView.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "출발지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                else if(finishPointView.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "도착지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                else {
+                    if(!BusStationLoading.BusStationList.contains(startingPointView.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "존재하지 않는 출발지입니다.", Toast.LENGTH_SHORT).show();
+                    else if(!BusStationLoading.BusStationList.contains(finishPointView.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "존재하지 않는 도착지입니다.", Toast.LENGTH_SHORT).show();
+                    else{
+                        Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                        intent.putExtra("starting_p", startingPointView.getText().toString());
+                        intent.putExtra("finish_p", finishPointView.getText().toString());
+                        startActivity(intent);//액티비티 띄우기
+                        finish();
+                    }
+                }
+            }
+        }); // 검색 기능
+    }
 
+    public void setNaviView(){
         // 여기부터 네비게이터 뷰 설정
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -159,6 +158,25 @@ public class MainActivity extends AppCompatActivity {
         // 여기까지 네비게이터 뷰 설정
     }
 
+    public void autoInputComplete(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView) {
+        // AutoCompleteTextView 에 아답터를 연결한다.
+        startingPointView.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
+        finishPointView.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,  BusStationLoading.BusStationList ));
+        // ##여기까지가 자동완성 부분
+    }
+
+    public void setSwapButton(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
+        ImageButton change_button = (ImageButton) findViewById(R.id.change_button);
+        change_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartFinishInputControl.swap_starting_and_ending(startingPointView, finishPointView);
+            }
+        }); // 출발지, 도착지 Swap 기능
+    }
+
     //앱최초실행확인 (true - 최초실행)
     public boolean CheckAppFirstExecute(){
         SharedPreferences pref = getSharedPreferences("IsFirst" , Activity.MODE_PRIVATE);
@@ -170,6 +188,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return !isFirst;
+    }
+
+    public void busStationSetting(SharedPreferences bus_station_info){
+        // bustation_setting
+        if(CheckAppFirstExecute())
+            BusStationLoading.settingList(bus_station_info);
+        else
+            BusStationLoading.checkingChanges(bus_station_info);
     }
 
     @Override
