@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 milli = milli + hour_24*60;
                 milli = milli + minute;
+                Toast.makeText(getApplicationContext(), milli+"분 전으로 알람이 설정되었습니다.", Toast.LENGTH_SHORT).show();
                 milli = milli * 60000;
                 SharedPreferences test = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = test.edit();
