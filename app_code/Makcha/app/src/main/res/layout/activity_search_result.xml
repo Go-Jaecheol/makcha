@@ -397,7 +397,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="@string/boardBusLocation3"
+                                            android:text="test"
                                             android:textSize="18dp"
                                             android:textColor="#D50000"/>
                                     </LinearLayout>
