@@ -40,6 +40,7 @@ public class SearchResultActivity extends MainActivity {
     public BusStationLoading BusStationLoading = new BusStationLoading();
     private final StartFinishInputControl StartFinishInputControl = new StartFinishInputControl();
     GetLastBusInfo GetLastBusInfo = new GetLastBusInfo();
+    GetBusBoard GetBusBoard = new GetBusBoard();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,8 @@ public class SearchResultActivity extends MainActivity {
 
         setBackButton();
         setBookmarkButton(starting_p, finish_p);
+
+        setBusBoard(startingPointView);
 
         // 여기부터 네비게이션 뷰 설정
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -203,6 +206,50 @@ public class SearchResultActivity extends MainActivity {
         TextView busArrivalTimeView = (TextView) findViewById(R.id.busArribalTime);
         busArrivalMsg = GetLastBusInfo.getLastBusAnnounceMsg();
         busArrivalTimeView.setText(busArrivalMsg);
+    }
+
+    public void setBusBoard(AutoCompleteTextView startingPointView){
+        /* View Part */
+        //board Bus number view
+        GetBusBoard.getBusBoardInfo(startingPointView.getText().toString());
+        String boardBusNumber1 = "";
+        TextView boardBusNumber1View = (TextView) findViewById(R.id.first_bus_name);
+        boardBusNumber1 = GetBusBoard.getBoardBusNumber1();
+        boardBusNumber1View.setText(boardBusNumber1);
+        String boardBusNumber2 = "";
+        TextView boardBusNumber2View = (TextView) findViewById(R.id.second_bus_name);
+        boardBusNumber2 = GetBusBoard.getBoardBusNumber2();
+        boardBusNumber2View.setText(boardBusNumber2);
+        String boardBusNumber3 = "";
+        TextView boardBusNumber3View = (TextView) findViewById(R.id.third_bus_name);
+        boardBusNumber3 = GetBusBoard.getBoardBusNumber3();
+        boardBusNumber3View.setText(boardBusNumber3);
+        //board Bus arrival time view
+        String boardBusArrivalTime1 = "";
+        TextView boardBusArrivalTime1View = (TextView) findViewById(R.id.first_bus_time);
+        boardBusArrivalTime1 = GetBusBoard.getBoardBusArrivalTime1();
+        boardBusArrivalTime1View.setText(boardBusArrivalTime1);
+        String boardBusArrivalTime2 = "";
+        TextView boardBusArrivalTime2View = (TextView) findViewById(R.id.second_bus_time);
+        boardBusArrivalTime2 = GetBusBoard.getBoardBusArrivalTime2();
+        boardBusArrivalTime2View.setText(boardBusArrivalTime2);
+        String boardBusArrivalTime3 = "";
+        TextView boardBusArrivalTime3View = (TextView) findViewById(R.id.third_bus_time);
+        boardBusArrivalTime3 = GetBusBoard.getBoardBusArrivalTime3();
+        boardBusArrivalTime3View.setText(boardBusArrivalTime3);
+        //board bus location view
+        String boardBusLocation1 = "";
+        TextView boardBusLocation1View = (TextView) findViewById(R.id.first_bus_location);
+        boardBusLocation1 = GetBusBoard.getBoardBusLocation1();
+        boardBusLocation1View.setText(boardBusLocation1);
+        String boardBusLocation2 = "";
+        TextView boardBusLocation2View = (TextView) findViewById(R.id.second_bus_location);
+        boardBusLocation2 = GetBusBoard.getBoardBusLocation2();
+        boardBusLocation2View.setText(boardBusLocation2);
+        String boardBusLocation3 = "";
+        TextView boardBusLocation3View = (TextView) findViewById(R.id.third_bus_location);
+        boardBusLocation3 = GetBusBoard.getBoardBusLocation3();
+        boardBusLocation3View.setText(boardBusLocation3);
     }
 
     public boolean CheckAppFirstExecute(){
