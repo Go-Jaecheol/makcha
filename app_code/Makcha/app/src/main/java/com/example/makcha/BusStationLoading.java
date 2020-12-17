@@ -7,20 +7,8 @@ public class BusStationLoading {
 
     public List<String> list = new ArrayList<String>();          // 데이터를 넣은 리스트변수
 
-    // BusStation에 변경이 있는지 확인하는 메소드
-    protected void checking_new_value()
-    {
-        int a = 0;
-        int b = 1;
-
-        // 변경이 있을 경우 새로운 BusStationInfo를 가져온다
-        if(a != b)
-        {
-        }
-        settingList(); // 리스트에 검색될 데이터(단어)를 추가한다.
-    }
-
-    private void settingList(){
+    // 서버에서 받아온 정류장 정보 setting
+    protected void settingList(){
         list.add("덕원고등학교앞2");
         list.add("욱수초등학교앞");
         list.add("시지중학교");

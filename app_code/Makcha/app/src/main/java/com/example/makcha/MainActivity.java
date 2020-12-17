@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Bustation new value check
-        BusStationLoading.checking_new_value();
+        // Bustation setting
+        BusStationLoading.settingList();
         // ##여기서부터 자동완성 부분
         final AutoCompleteTextView startingPointView = (AutoCompleteTextView) findViewById(R.id.starting_point);
         final AutoCompleteTextView finishPointView = (AutoCompleteTextView) findViewById(R.id.finish_point);
