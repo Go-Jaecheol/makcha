@@ -133,13 +133,24 @@ public class SearchResultActivity extends AppCompatActivity {
         ImageButton search_button = (ImageButton)findViewById(R.id.search_button);
         // search_button.setBackgroundResource(R.drawable.searchbtn);
         search_button.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
-                intent.putExtra("starting_p", startingPointView.getText().toString());
-                intent.putExtra("finish_p", finishPointView.getText().toString());
-                startActivity(intent);//액티비티 띄우기
-                finish();
+                if(startingPointView.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "출발지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                else if(finishPointView.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "도착지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                else {
+                    if(!BusStationLoading.list.contains(startingPointView.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "존재하지 않는 출발지입니다.", Toast.LENGTH_SHORT).show();
+                    else if(!BusStationLoading.list.contains(finishPointView.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "존재하지 않는 도착지입니다.", Toast.LENGTH_SHORT).show();
+                    else{
+                        Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                        intent.putExtra("starting_p", startingPointView.getText().toString());
+                        intent.putExtra("finish_p", finishPointView.getText().toString());
+                        startActivity(intent);//액티비티 띄우기
+                        finish();
+                    }
+                }
             }
         }); // 검색 기능
 
