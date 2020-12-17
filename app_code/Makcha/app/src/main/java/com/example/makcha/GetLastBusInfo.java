@@ -8,9 +8,14 @@ public class GetLastBusInfo {
         // 1. 서버에게 출발지와 목적지 전달
         // 2. 막차 버스 정보를 받는다
 
-        // 3-1. 받은 정보 중 버스 번호 저장
+        // 3. 받은 정보 setter에게 전달
+        setLastBusInfo();
+    }
+
+    private void setLastBusInfo(){
+        // 1. 받은 정보 중 버스 번호 저장
         lastBusNumer = "937";
-        // 3-2. 받은 정보 막차까지 남은 예상 분 저장
+        // 2. 받은 정보 막차까지 남은 예상 분 저장
         lastBusRemainTime = 90;
     }
 
