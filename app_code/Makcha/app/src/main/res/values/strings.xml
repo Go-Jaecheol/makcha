@@ -3,4 +3,13 @@
     <string name="cantGetBusNumber">버스를 찾을 수 없습니다.</string>
     <string name="busArraivalTime">버스 도착 시간 없음</string>
     <string name="showBillboard">현재 전광판 보기</string>
+    <string name="boardBusNumber1">넘버1</string>
+    <string name="boardBusArrivalTime1">시간1</string>
+    <string name="boardBusLocation1">정류장1</string>
+    <string name="boardBusNumber2">넘버2</string>
+    <string name="boardBusArrivalTime2">시간2</string>
+    <string name="boardBusLocation2">정류장2</string>
+    <string name="boardBusNumber3">넘버3</string>
+    <string name="boardBusArrivalTime3">시간3</string>
+    <string name="boardBusLocation3">정류장3</string>
 </resources>

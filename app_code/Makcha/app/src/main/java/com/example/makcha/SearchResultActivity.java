@@ -131,7 +131,7 @@ public class SearchResultActivity extends MainActivity {
 
     public void setAlarm(){
         int arrivalTime;
-        arrivalTime = GetLastBusInfo.setLastBussArrivalTime() * 60000;
+        arrivalTime = GetLastBusInfo.getLastBusRemainTime() * 60000;
 
         // ##여기부터 알람설정
         Switch switchbutton = (Switch) findViewById(R.id.alarm_switch);
@@ -193,15 +193,16 @@ public class SearchResultActivity extends MainActivity {
     public void setLastBusInfo(AutoCompleteTextView startingPointView, AutoCompleteTextView finishPointView){
         /* View Part */
         //set busNumberVier
+        GetLastBusInfo.getLastBusInfo(startingPointView.getText().toString(), finishPointView.getText().toString());
         String busNumber = "";
         TextView busNumberView = (TextView) findViewById(R.id.busNumber);
-        busNumber = GetLastBusInfo.getLastBusNumber();
+        busNumber = GetLastBusInfo.getLastBusNumer();
         busNumberView.setText(busNumber);
         //busArrivalTime View
-        String busArrivalTime = "";
+        String busArrivalMsg = "";
         TextView busArrivalTimeView = (TextView) findViewById(R.id.busArribalTime);
-        busArrivalTime = GetLastBusInfo.setLastBusArrivalTime();
-        busArrivalTimeView.setText(busArrivalTime);
+        busArrivalMsg = GetLastBusInfo.getLastBusAnnounceMsg();
+        busArrivalTimeView.setText(busArrivalMsg);
     }
 
     public boolean CheckAppFirstExecute(){

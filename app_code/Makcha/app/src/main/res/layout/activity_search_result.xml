@@ -280,7 +280,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="937"
+                                            android:text="@string/boardBusNumber1"
                                             android:textSize="20dp"
                                             android:textColor="#FFF176"/>
                                     </LinearLayout>
@@ -293,7 +293,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="5분 전"
+                                            android:text="@string/boardBusArrivalTime1"
                                             android:textSize="18dp"
                                             android:gravity="right"
                                             android:textColor="#76FF03"/>
@@ -307,7 +307,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="동대구역"
+                                            android:text="@string/boardBusLocation1"
                                             android:textSize="18dp"
                                             android:textColor="#D50000"/>
                                     </LinearLayout>
@@ -325,7 +325,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="623"
+                                            android:text="@string/boardBusNumber2"
                                             android:textSize="20dp"
                                             android:textColor="#FFF176"/>
                                     </LinearLayout>
@@ -338,7 +338,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="14분 전"
+                                            android:text="@string/boardBusArrivalTime2"
                                             android:textSize="18dp"
                                             android:gravity="right"
                                             android:textColor="#76FF03"/>
@@ -352,7 +352,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="이마트월배점앞"
+                                            android:text="@string/boardBusLocation2"
                                             android:textSize="18dp"
                                             android:textColor="#D50000"/>
                                     </LinearLayout>
@@ -370,7 +370,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="달서4"
+                                            android:text="@string/boardBusNumber3"
                                             android:textSize="20dp"
                                             android:textColor="#FFF176"/>
                                     </LinearLayout>
@@ -383,7 +383,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="15분 전"
+                                            android:text="@string/boardBusArrivalTime3"
                                             android:textSize="18dp"
                                             android:gravity="right"
                                             android:textColor="#76FF03"/>
@@ -397,7 +397,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:padding="10dp"
-                                            android:text="삼성래미안1차건너"
+                                            android:text="@string/boardBusLocation3"
                                             android:textSize="18dp"
                                             android:textColor="#D50000"/>
                                     </LinearLayout>
