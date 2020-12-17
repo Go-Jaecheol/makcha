@@ -48,13 +48,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         }else builder.setSmallIcon(R.mipmap.ic_launcher); // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
 
 
+
         builder.setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
 
                 .setTicker("{Time to take a bus!!!}")
-                .setContentTitle("버스 도착 5분전!")
-                .setContentText("출발하셔야 됩니다,,,,,")
+                .setContentTitle("막차 버스 오는중")
+                .setContentText("당신의 막차가 오고 있습니다.. 놓치지마세요!")
                 .setContentInfo("INFO")
                 .setContentIntent(pendingI);
 

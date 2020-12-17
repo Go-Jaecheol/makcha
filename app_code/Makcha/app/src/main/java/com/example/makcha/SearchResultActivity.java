@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,10 +28,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -60,6 +57,9 @@ public class SearchResultActivity extends AppCompatActivity {
         busArrivalTime = GetLastBusInfo.setLastBusArrivalTime();
         busArrivalTimeView.setText(busArrivalTime);
 
+        int arrivalTime;
+        arrivalTime = GetLastBusInfo.setLastBussArrivalTime() * 60000;
+
         // ##여기부터 알람설정
         Switch switchbutton = (Switch) findViewById(R.id.alarm_switch);
         switchbutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -72,7 +72,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
                     // 현재 지정된 시간으로 알람 시간 설정
                     Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(System.currentTimeMillis()+value); //10초뒤 알람(milli)
+                    calendar.setTimeInMillis(System.currentTimeMillis()+arrivalTime-value); //버스 도착 value분 전 알람(milli)
 
                     // 이미 지난 시간을 지정했다면 다음날 같은 시간으로 설정
                     if (calendar.before(Calendar.getInstance())) {
@@ -153,6 +153,26 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
             }
         }); // 검색 기능
+
+
+
+        ImageButton bookmarkbutton = (ImageButton)findViewById(R.id.bookmarkbutton);
+        bookmarkbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences book = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = book.edit();
+                editor.putString("start", starting_p);
+                editor.putString("finish", finish_p);
+                editor.commit();
+                Toast.makeText(getApplicationContext(), "즐겨찾기가 설정 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }); // 즐겨찾기 설정 기능
+
+
+
+
+
 
 
         // 여기부터 네비게이션 뷰 설정

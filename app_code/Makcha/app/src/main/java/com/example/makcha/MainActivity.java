@@ -1,15 +1,16 @@
 package com.example.makcha;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -19,9 +20,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Toast toast;
@@ -80,6 +78,51 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }); // 검색 기능
+
+        ImageButton bookmark1_btn = (ImageButton)findViewById(R.id.bookmark1_btn);
+        TextView bookmark1_start = (TextView)findViewById(R.id.bookmark1_start);
+        TextView bookmark1_finish = (TextView)findViewById(R.id.bookmark1_finish);
+        bookmark1_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!BusStationLoading.BusStationList.contains(bookmark1_start.getText().toString()))
+                    Toast.makeText(getApplicationContext(), "존재하지 않는 출발지입니다.", Toast.LENGTH_SHORT).show();
+                else if(!BusStationLoading.BusStationList.contains(bookmark1_finish.getText().toString()))
+                    Toast.makeText(getApplicationContext(), "존재하지 않는 도착지입니다.", Toast.LENGTH_SHORT).show();
+                else {
+                    Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                    intent.putExtra("starting_p", bookmark1_start.getText().toString());
+                    intent.putExtra("finish_p", bookmark1_finish.getText().toString());
+                    startActivity(intent);//액티비티 띄우기
+                    finish();
+                }
+            }
+        }); // 즐겨찾기 이동 기능
+
+        SharedPreferences book = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String bookmark_sp = book.getString("start", "즐겨찾기가 없습니다");
+        String bookmark_fp = book.getString("finish", "즐겨찾기가 없습니다");
+
+
+        bookmark1_start.setText(bookmark_sp);
+        bookmark1_finish.setText(bookmark_fp);
+
+
+        ImageButton unbookmarkbutton = (ImageButton)findViewById(R.id.unbookmarkbutton);
+        unbookmarkbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = book.edit();
+                editor.putString("start", "즐겨찾기가 없습니다");
+                editor.putString("finish", "즐겨찾기가 없습니다");
+                editor.commit();
+                Toast.makeText(getApplicationContext(), "즐겨찾기가 해제 되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);//액티비티 띄우기
+                finish();
+            }
+        }); // 즐겨찾기 해제 기능
+
 
         // 여기부터 네비게이터 뷰 설정
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
